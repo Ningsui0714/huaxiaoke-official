@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird</title>
+    <style>
+        /* 基础样式，仅用于居中游戏画布 */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #gameContainer {
+            position: relative;
+        }
+        #gameCanvas {
+            border: 1px solid #000;
+            background-color: #4EC0CA;
+        }
+        #startScreen, #gameOverScreen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="gameContainer">
+        <canvas id="gameCanvas" width="400" height="600"></canvas>
+        <div id="startScreen">
+            <h1>飞翔的小科</h1>
+            <p>按空格键或点击屏幕跳跃</p>
+            <button onclick="startGame()">开始游戏</button>
+        </div>
+        <div id="gameOverScreen" style="display: none;">
+            <h1>游戏结束</h1>
+            <p>得分: <span id="scoreDisplay">0</span></p>
+            <button onclick="restartGame()">再来一次</button>
+        </div>
+    </div>
+
+    <script>
+        // 获取画布和上下文
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // 游戏元素引用
+        const startScreen = document.getElementById('startScreen');
+        const gameOverScreen = document.getElementById('gameOverScreen');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        
+        // 游戏设置 - 在这里替换为您自己的素材
+        const gameAssets = {
+            bird: {
+                // 替换为您的鸟图片路径
+                image: new Image(),
+                width: 40,
+                height: 30
+            },
+            pipe: {
+                // 替换为您的管道图片路径
+                topImage: new Image(),
+                bottomImage: new Image(),
+                width: 60,
+                height: 400
+            },
+            background: {
+                // 替换为您的背景图片路径
+                image: new Image()
+            },
+            ground: {
+                // 替换为您的地面图片路径
+                image: new Image(),
+                height: 100
+            }
+        };
+        
+        // 设置默认素材（您可以替换这些路径）
+        gameAssets.bird.image.src = 'image/小狗科.jpg';
+        gameAssets.pipe.topImage.src = 'image/华小科.jpg';
+        gameAssets.pipe.bottomImage.src = 'image/华小科.jpg';
+        gameAssets.background.image.src = 'image/华小科.jpg';
+        gameAssets.ground.image.src = 'image/华小科.jpg';
+        
+        // 游戏变量
+        let bird = {
+            x: 50,
+            y: canvas.height / 2,
+            velocity: 0,
+            gravity: 0.3,
+            jumpStrength: -7
+        };
+        
+        let pipes = [];
+        let pipeSpawnTimer = 0;
+        const pipeSpawnInterval = 150; // 每隔多少帧生成一个管道
+        const pipeGap = 200; // 管道之间的间隙
+        
+        let score = 0;
+        let isGameRunning = false;
+        let groundX = 0;
+        const groundSpeed = 2;
+        
+        // 加载素材并显示加载状态
+        let loadedAssets = 0;
+        const totalAssets = Object.keys(gameAssets).length;
+        
+        function checkAssetsLoaded() {
+            loadedAssets++;
+            if (loadedAssets === totalAssets) {
+                console.log('所有素材加载完成');
+            }
+        }
+        
+        // 为每个素材添加加载完成事件
+        gameAssets.bird.image.onload = checkAssetsLoaded;
+        gameAssets.pipe.topImage.onload = checkAssetsLoaded;
+        gameAssets.pipe.bottomImage.onload = checkAssetsLoaded;
+        gameAssets.background.image.onload = checkAssetsLoaded;
+        gameAssets.ground.image.onload = checkAssetsLoaded;
+        
+        // 游戏循环
+        function gameLoop() {
+            if (!isGameRunning) return;
+            
+            // 清空画布
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // 绘制背景
+            ctx.drawImage(gameAssets.background.image, 0, 0, canvas.width, canvas.height);
+            
+            // 鸟的物理效果
+            bird.velocity += bird.gravity;
+            bird.y += bird.velocity;
+            
+            // 绘制鸟
+            ctx.drawImage(
+                gameAssets.bird.image, 
+                bird.x, 
+                bird.y, 
+                gameAssets.bird.width, 
+                gameAssets.bird.height
+            );
+            
+            // 生成管道
+            pipeSpawnTimer++;
+            if (pipeSpawnTimer >= pipeSpawnInterval) {
+                const pipeHeight = Math.random() * (canvas.height - gameAssets.ground.height - pipeGap - 100) + 50;
+                pipes.push({
+                    x: canvas.width,
+                    topHeight: pipeHeight,
+                    bottomY: pipeHeight + pipeGap
+                });
+                pipeSpawnTimer = 0;
+            }
+            
+            // 移动和绘制管道
+            for (let i = pipes.length - 1; i >= 0; i--) {
+                const pipe = pipes[i];
+                pipe.x -= 2;
+                
+                // 绘制上管道
+                ctx.drawImage(
+                    gameAssets.pipe.topImage, 
+                    pipe.x, 
+                    0, 
+                    gameAssets.pipe.width, 
+                    pipe.topHeight
+                );
+                
+                // 绘制下管道
+                ctx.drawImage(
+                    gameAssets.pipe.bottomImage, 
+                    pipe.x, 
+                    pipe.bottomY, 
+                    gameAssets.pipe.width, 
+                    canvas.height - pipe.bottomY - gameAssets.ground.height
+                );
+                
+                // 移除离开画布的管道
+                if (pipe.x + gameAssets.pipe.width < 0) {
+                    pipes.splice(i, 1);
+                    score++; // 通过管道加分
+                }
+                
+                // 碰撞检测
+                if (
+                    bird.x + gameAssets.bird.width > pipe.x &&
+                    bird.x < pipe.x + gameAssets.pipe.width &&
+                    (bird.y < pipe.topHeight || bird.y + gameAssets.bird.height > pipe.bottomY)
+                ) {
+                    endGame();
+                    return;
+                }
+            }
+            
+            // 绘制地面（滚动效果）
+            groundX -= groundSpeed;
+            if (groundX <= -canvas.width) {
+                groundX = 0;
+            }
+            ctx.drawImage(
+                gameAssets.ground.image, 
+                groundX, 
+                canvas.height - gameAssets.ground.height, 
+                canvas.width, 
+                gameAssets.ground.height
+            );
+            // 绘制第二张地面图片以实现无缝滚动
+            ctx.drawImage(
+                gameAssets.ground.image, 
+                groundX + canvas.width, 
+                canvas.height - gameAssets.ground.height, 
+                canvas.width, 
+                gameAssets.ground.height
+            );
+            
+            // 检测是否撞到地面或顶部
+            if (
+                bird.y + gameAssets.bird.height > canvas.height - gameAssets.ground.height ||
+                bird.y < 0
+            ) {
+                endGame();
+                return;
+            }
+            
+            // 绘制分数
+            ctx.fillStyle = '#000';
+            ctx.font = '30px Arial';
+            ctx.fillText(score, 10, 40);
+            
+            requestAnimationFrame(gameLoop);
+        }
+        
+        // 鸟跳跃
+        function jump() {
+            if (isGameRunning) {
+                bird.velocity = bird.jumpStrength;
+            }
+        }
+        
+        // 开始游戏
+        function startGame() {
+            startScreen.style.display = 'none';
+            gameOverScreen.style.display = 'none';
+            
+            // 重置游戏状态
+            bird.y = canvas.height / 2;
+            bird.velocity = 0;
+            pipes = [];
+            score = 0;
+            isGameRunning = true;
+            
+            gameLoop();
+        }
+        
+        // 结束游戏
+        function endGame() {
+            isGameRunning = false;
+            gameOverScreen.style.display = 'flex';
+            scoreDisplay.textContent = score;
+        }
+        
+        // 重新开始游戏
+        function restartGame() {
+            startGame();
+        }
+        
+        // 事件监听 - 空格跳跃
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault(); // 防止页面滚动
+                if (!isGameRunning && startScreen.style.display !== 'none') {
+                    startGame();
+                } else {
+                    jump();
+                }
+            }
+        });
+        
+        // 点击屏幕跳跃
+        canvas.addEventListener('click', () => {
+            if (!isGameRunning && startScreen.style.display !== 'none') {
+                startGame();
+            } else {
+                jump();
+            }
+        });
+    </script>
+</body>
+</html>
