@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人主页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#1E293B',
+                        light: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .transition-custom {
+                transition: all 0.3s ease;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-light to-blue-50 min-h-screen font-sans text-dark">
+    <!-- 页面容器 -->
+    <div class="container mx-auto px-4 py-8 md:py-16 max-w-5xl">
+        <!-- 标题部分 - 左上角 -->
+        <header class="mb-12 md:mb-20">
+            <h1 class="text-4xl md:text-6xl font-bold text-primary tracking-tight text-shadow">
+                个人主页
+            </h1>
+        </header>
+
+        <!-- 主要内容区 -->
+        <main class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- 自我简介部分 -->
+            <section class="md:col-span-2 bg-white rounded-xl shadow-lg p-6 md:p-8 transform hover:shadow-xl transition-custom">
+                <h2 class="text-2xl font-semibold mb-4 text-dark border-b border-gray-200 pb-2">
+                    <i class="fa fa-user-circle-o mr-2 text-primary"></i>自我简介
+                </h2>
+                <div class="prose max-w-none">
+                    <!-- 这里可以填充您的个人简介内容 -->
+                    <p class="text-gray-700 leading-relaxed">
+                        您好！我是一名热爱技术的开发者/设计师/创作者（根据您的身份选择）。
+                        在这里，您可以了解我的工作、项目和兴趣爱好。
+                        我热衷于学习新技术，并将其应用到实际项目中解决问题。
+                        欢迎通过下方联系方式与我交流。
+                    </p>
+                    <!-- 可以根据需要添加更多段落 -->
+                </div>
+            </section>
+
+            <!-- 联系方式部分 -->
+            <section class="bg-white rounded-xl shadow-lg p-6 md:p-8 transform hover:shadow-xl transition-custom">
+                <h2 class="text-2xl font-semibold mb-4 text-dark border-b border-gray-200 pb-2">
+                    <i class="fa fa-link mr-2 text-primary"></i>联系方式
+                </h2>
+                <ul class="space-y-4">
+                    <li class="flex items-center">
+                        <i class="fa fa-envelope-o text-primary w-6"></i>
+                        <span class="ml-3 text-gray-700">example@email.com</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="fa fa-phone text-primary w-6"></i>
+                        <span class="ml-3 text-gray-700">123-4567-8910</span>
+                    </li>
+                    <li class="flex items-center">
+                        <a href="https://github.com/Ningsui0714" target="_blank" rel="noopener noreferrer" 
+                           class="flex items-center text-gray-700 hover:text-primary transition-custom">
+                            <i class="fa fa-github text-primary w-6"></i>
+                            <span class="ml-3">GitHub 主页</span>
+                        </a>
+                    </li>
+                    <li class="flex items-center">
+                        <a href="https://space.bilibili.com/1235403264?spm_id_from=333.1007.0.0" target="_blank" rel="noopener noreferrer" 
+                           class="flex items-center text-gray-700 hover:text-primary transition-custom">
+                            <i class="fa fa-play-circle text-primary w-6"></i>
+                            <span class="ml-3">Bilibili 主页</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="mt-16 text-center text-gray-500 text-sm">
+            <p>&copy; 2023 个人主页 | 设计与开发</p>
+        </footer>
+    </div>
+
+    <!-- 简单的交互效果脚本 -->
+    <script>
+        // 添加页面加载动画效果
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.classList.add('opacity-100');
+            document.body.classList.remove('opacity-0');
+        });
+    </script>
+</body>
+</html>
