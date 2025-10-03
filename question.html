@@ -1,0 +1,94 @@
+<title>个人主页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        dark: '#1E293B',
+                        light: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .transition-custom {
+                transition: all 0.3s ease;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-light to-blue-50 min-h-screen font-sans text-dark">
+    <div class="container mx-auto px-4 py-8 md:py-16 max-w-5xl">
+        <header class="mb-12 md:mb-20">
+            <h1 class="text-4xl md:text-6xl font-bold text-primary tracking-tight text-shadow">
+                问题反馈
+            </h1>
+        </header>
+<body>
+    <section class="md:col-span-3 bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h2 class="text-2xl font-semibold mb-6 text-dark border-b border-gray-200 pb-2">
+                    <i class="fa fa-comments mr-2 text-primary"></i>问题反馈
+                </h2>
+                
+                <form id="feedbackForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">您的姓名</label>
+                            <input type="text" id="name" name="name" 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-custom"
+                                   placeholder="请输入您的姓名">
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-700 mb-1">联系邮箱</label>
+                            <input type="email" id="email" name="email" 
+                                   class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-custom"
+                                   placeholder="请输入您的邮箱">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">反馈主题</label>
+                        <input type="text" id="subject" name="subject" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-custom"
+                               placeholder="请输入反馈主题">
+                    </div>
+                    
+                    <div>
+                        <label for="message" class="block text-sm font-medium text-gray-700 mb-1">反馈内容</label>
+                        <textarea id="message" name="message" rows="5" 
+                                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-custom"
+                                  placeholder="请详细描述您遇到的问题或建议..."></textarea>
+                    </div>
+                    
+                    <div>
+                        <button type="submit" 
+                                class="bg-primary hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-custom flex items-center">
+                            <i class="fa fa-paper-plane mr-2"></i>提交反馈
+                        </button>
+                    </div>
+                    <p>
+                        只是一个框架，提交反馈完全没有作用，仅作展示
+                    </p>
+                </form>
+                
+                <!-- 反馈提交成功提示 -->
+                <div id="successMessage" class="mt-6 p-4 bg-green-100 text-green-800 rounded-lg hidden">
+                    <i class="fa fa-check-circle mr-2"></i>
+                    <span>感谢您的反馈！我们会尽快处理并回复您。</span>
+                </div>
+            </section>
+</body>
+</html>
