@@ -97,7 +97,7 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div class="border border-gray-100 rounded-lg p-5 card-hover">
-                        <h3 class="text-xl font-medium mb-2 text-dark">项目名称一</h3>
+                        <h3 class="text-xl font-medium mb-2 text-dark">Twinshots</h3>
                         <p class="text-gray-600 text-sm mb-4">这是一个memo的实习项目，很招笑。</p>
                         <a href="https://github.com/Ningsui0714/memo-intership" target="_blank" rel="noopener noreferrer" 
                            class="inline-flex items-center text-primary hover:text-blue-700 transition-custom text-sm font-medium">
@@ -105,7 +105,7 @@
                         </a>
                     </div>
                     <div class="border border-gray-100 rounded-lg p-5 card-hover">
-                        <h3 class="text-xl font-medium mb-2 text-dark">项目名称二</h3>
+                        <h3 class="text-xl font-medium mb-2 text-dark">华小科</h3>
                         <p class="text-gray-600 text-sm mb-4">这是一个华小科的新手项目，就是你现在看到的东西。</p>
                         <a href="https://github.com/Ningsui0714/huaxiaoke-official" target="_blank" rel="noopener noreferrer" 
                            class="inline-flex items-center text-primary hover:text-blue-700 transition-custom text-sm font-medium">
@@ -123,14 +123,41 @@
                 <a href="question.html" target="_blank" rel="noopener noreferrer" 
                 class="inline-flex items-center text-primary hover:text-blue-700 transition-custom text-sm font-medium">
                     点此反馈问题
+                    没搞明白为什么点进去会乱码（在网址里面）
                 </a>
             </section>  
             <section>
                 <a href="demo.html" target="_blank" rel="noopener noreferrer" 
                 class="inline-flex items-center text-primary hover:text-blue-700 transition-custom text-sm font-medium">
-                    如果你想看没有ai写的CSS部分之前的页面点这里
+                    如果你想看没有写CSS部分之前的页面点这里
+                    另外CSS部分有很多都是我抄的
                 </a>
             </section>  
+            <div class="merit-counter">
+                <p>摸头次数<span id="meritCount">0</span></p>
+                <button id="addMeritBtn">
+                <img src="image/小狗科.jpg" alt="这里应该是一张小科的照片！">
+                </button>
+            </div>
+            <script>
+                const meritCountElement = document.getElementById('meritCount');
+                const addMeritButton = document.getElementById('addMeritBtn');
+                let meritCount = 0;
+                function updateMeritDisplay() {
+                    meritCountElement.textContent = meritCount;
+                    meritCountElement.style.transition = 'all 0.3s ease';
+                    meritCountElement.style.transform = 'scale(1.2)';
+                    setTimeout(() => {
+                    meritCountElement.style.transform = 'scale(1)';
+                    }, 300);
+                }
+                function addMerit() {
+                    meritCount++;
+                    updateMeritDisplay()
+                }
+                addMeritButton.addEventListener('click', addMerit);
+                </script>
+    
         </main>
 
     </div>
