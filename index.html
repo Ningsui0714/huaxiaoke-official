@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>个人主页</title>
+    <title>华小科 - 个人主页</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
@@ -43,21 +43,23 @@
         </header>
 
         <main class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- 自我简介 -->
             <section class="md:col-span-2 bg-white rounded-xl shadow-lg p-6 md:p-8 transform hover:shadow-xl transition-custom">
                 <h2 class="text-2xl font-semibold mb-4 text-dark border-b border-gray-200 pb-2">
                     <i class="fa fa-user-circle-o mr-2 text-primary"></i>自我简介
                 </h2>
                 <div class="prose max-w-none">
                     <p class="text-gray-700 leading-relaxed">
-                        您好！
-                        关注华小科喵~关注华小科谢谢喵
+                        您好！关注华小科喵~关注华小科谢谢喵
                     </p>
-                    <a href="https://space.bilibili.com/672455305?spm_id_from=333.337.0.0" target="_blank">
-                           <span>华小科主页（点击大脑袋就能跳转）</span>
-                           <img src="image/华小科.jpg" alt="这里应该是一张小科的照片！" width="100" height="100">
+                    <a href="https://space.bilibili.com/672455305?spm_id_from=333.337.0.0" target="_blank" rel="noopener noreferrer">
+                        <span>华小科主页（点击大脑袋就能跳转）</span>
+                        <img src="image/华小科.jpg" alt="华小科的照片" width="100" height="100">
                     </a>
                 </div>
             </section>
+
+            <!-- 联系方式 -->
             <section class="bg-white rounded-xl shadow-lg p-6 md:p-8 transform hover:shadow-xl transition-custom">
                 <h2 class="text-2xl font-semibold mb-4 text-dark border-b border-gray-200 pb-2">
                     <i class="fa fa-link mr-2 text-primary"></i>联系方式
@@ -65,9 +67,7 @@
                 <ul class="space-y-4">
                     <li class="flex items-center">
                         <i class="fa fa-envelope-o text-primary w-6"></i>
-                        <span class="ml-3 text-gray-700">
-                            2285373500@qq.com
-                        </span>
+                        <span class="ml-3 text-gray-700">2285373500@qq.com</span>
                     </li>
                     <li class="flex items-center">
                         <i class="fa fa-phone text-primary w-6"></i>
@@ -89,12 +89,12 @@
                     </li>
                 </ul>
             </section>
+
+            <!-- 个人项目 -->
             <section class="md:col-span-3 bg-white rounded-xl shadow-lg p-6 md:p-8">
                 <h2 class="text-2xl font-semibold mb-6 text-dark border-b border-gray-200 pb-2">
                     <i class="fa fa-code-fork mr-2 text-primary"></i>个人项目
                 </h2>
-                
-                
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div class="border border-gray-100 rounded-lg p-5 card-hover">
                         <h3 class="text-xl font-medium mb-2 text-dark">Twinshots</h3>
@@ -112,57 +112,68 @@
                             查看项目 <i class="fa fa-external-link ml-1"></i>
                         </a>
                     </div>
-            </section>  
-            <section>
-                <a href="flappybird.html" target="_blank" rel="noopener noreferrer" 
-                class="inline-flex items-center text-primary hover:text-blue-700 transition-custom text-sm font-medium">
-                <p>偷偷用AI写了个小游戏</p>
-                </a>
-            </section>    
-            <section>
-                <a href="question.html" target="_blank" rel="noopener noreferrer" 
-                class="inline-flex items-center text-primary hover:text-blue-700 transition-custom text-sm font-medium">
-                    点此反馈问题
-                    没搞明白为什么点进去会乱码（在网址里面）
-                </a>
-            </section>  
-            <section>
-                <a href="demo.html" target="_blank" rel="noopener noreferrer" 
-                class="inline-flex items-center text-primary hover:text-blue-700 transition-custom text-sm font-medium">
-                    如果你想看没有写CSS部分之前的页面点这里
-                    另外CSS部分有很多都是我抄的
-                </a>
-            </section>  
-            <div class="merit-counter">
-                <p>摸头次数<span id="meritCount">0</span></p>
-                <button id="addMeritBtn">
-                <img src="image/小狗科.jpg" alt="这里应该是一张小科的照片！">
-                </button>
-            </div>
-            <script>
-                const meritCountElement = document.getElementById('meritCount');
-                const addMeritButton = document.getElementById('addMeritBtn');
-                let meritCount = 0;
-                function updateMeritDisplay() {
-                    meritCountElement.textContent = meritCount;
-                    meritCountElement.style.transition = 'all 0.3s ease';
-                    meritCountElement.style.transform = 'scale(1.2)';
-                    setTimeout(() => {
-                    meritCountElement.style.transform = 'scale(1)';
-                    }, 300);
-                }
-                function addMerit() {
-                    meritCount++;
-                    updateMeritDisplay()
-                }
-                addMeritButton.addEventListener('click', addMerit);
-                </script>
-    
-        </main>
+                </div>
+            </section>
 
+            <!-- 小游戏链接 -->
+            <section class="bg-white rounded-xl shadow-lg p-6 md:p-8 transition-custom hover:shadow-xl">
+                <a href="flappybird.html" 
+                   class="inline-flex items-center text-primary hover:text-blue-700 transition-custom text-sm font-medium">
+                    <i class="fa fa-gamepad mr-2"></i>偷偷用AI写了个小游戏
+                </a>
+            </section>
+
+            <!-- 问题反馈链接 -->
+            <section class="bg-white rounded-xl shadow-lg p-6 md:p-8 transition-custom hover:shadow-xl">
+                <a href="question.html" 
+                   class="inline-flex items-center text-primary hover:text-blue-700 transition-custom text-sm font-medium">
+                    <i class="fa fa-comments mr-2"></i>点此反馈问题
+                </a>
+            </section>
+
+            <!-- Demo页面链接 -->
+            <section class="bg-white rounded-xl shadow-lg p-6 md:p-8 transition-custom hover:shadow-xl">
+                <a href="demo.html" 
+                   class="inline-flex items-center text-primary hover:text-blue-700 transition-custom text-sm font-medium">
+                    <i class="fa fa-file-code-o mr-2"></i>查看无CSS版本的页面
+                </a>
+            </section>
+
+            <!-- 摸头计数器 -->
+            <section class="md:col-span-3 bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <div class="merit-counter text-center">
+                    <p class="text-lg mb-4">摸头次数：<span id="meritCount" class="text-2xl font-bold text-primary">0</span></p>
+                    <button id="addMeritBtn" class="transition-custom hover:scale-105">
+                        <img src="image/小狗科.jpg" alt="小狗科的照片" class="rounded-lg max-w-xs mx-auto">
+                    </button>
+                </div>
+            </section>
+        </main>
     </div>
+
     <script>
-        // 添加页面加载动画效果
+        // 摸头计数器
+        const meritCountElement = document.getElementById('meritCount');
+        const addMeritButton = document.getElementById('addMeritBtn');
+        let meritCount = 0;
+
+        function updateMeritDisplay() {
+            meritCountElement.textContent = meritCount;
+            meritCountElement.style.transition = 'all 0.3s ease';
+            meritCountElement.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                meritCountElement.style.transform = 'scale(1)';
+            }, 300);
+        }
+
+        function addMerit() {
+            meritCount++;
+            updateMeritDisplay();
+        }
+
+        addMeritButton.addEventListener('click', addMerit);
+
+        // 页面加载动画效果
         document.addEventListener('DOMContentLoaded', () => {
             document.body.classList.add('opacity-100');
             document.body.classList.remove('opacity-0');
