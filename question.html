@@ -1,4 +1,9 @@
-<title>问题反馈</title>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>问题反馈 - 华小科</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <script>
@@ -35,9 +40,13 @@
             <h1 class="text-4xl md:text-6xl font-bold text-primary tracking-tight text-shadow">
                 问题反馈
             </h1>
+            <a href="index.html" class="inline-flex items-center text-primary hover:text-blue-700 transition-custom mt-4">
+                <i class="fa fa-arrow-left mr-2"></i>返回主页
+            </a>
         </header>
-<body>
-    <section class="md:col-span-3 bg-white rounded-xl shadow-lg p-6 md:p-8">
+
+        <main>
+            <section class="bg-white rounded-xl shadow-lg p-6 md:p-8">
                 <h2 class="text-2xl font-semibold mb-6 text-dark border-b border-gray-200 pb-2">
                     <i class="fa fa-comments mr-2 text-primary"></i>问题反馈
                 </h2>
@@ -79,14 +88,17 @@
                             <i class="fa fa-paper-plane mr-2"></i>提交反馈
                         </button>
                     </div>
-                    <p>
+                    <p class="text-gray-500 text-sm">
                         只是一个框架，提交反馈完全没有作用，仅作展示
                     </p>
                 </form>
+                
                 <div id="successMessage" class="mt-6 p-4 bg-green-100 text-green-800 rounded-lg hidden">
                     <i class="fa fa-check-circle mr-2"></i>
                     <span>感谢您的反馈！我们会尽快处理并回复您。</span>
                 </div>
             </section>
+        </main>
+    </div>
 </body>
 </html>
